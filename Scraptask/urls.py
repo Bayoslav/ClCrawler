@@ -15,10 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from tracker.views import IndexView,Remove,Edit
+from tracker.views import IndexView,Remove,Edit,PodesavanjaVju
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', IndexView.as_view()),
     url(r'^remove/', Remove.as_view()),
     url(r'^edit/', Edit.as_view()),
+    url(r'^settings/', PodesavanjaVju.as_view()),
 ]

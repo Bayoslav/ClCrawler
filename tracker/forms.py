@@ -1,6 +1,7 @@
 from django import forms
-from .models import CarModel
+from .models import CarModel,Podesavanja
 class CarForm(forms.ModelForm):
+    name = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control','placeholder': 'Name of the model','aria-describedby': 'sizing-addon3'}))
     link = forms.URLField(required=True, widget=forms.TextInput(attrs={'class': 'form-control','placeholder': 'Enter car search link here','aria-describedby': 'sizing-addon3'}))
     #url = forms.URLField(label='Your website', required=False)
     #list_choices = ['Texas','Alabama']
@@ -11,12 +12,10 @@ class CarForm(forms.ModelForm):
                   ("California","California"),
                   ("Colorado","Colorado"),
                   ("Connecticut","Connecticut"),
-                  ("District of Columbia","District of Columbia"),
                   ("Delaware","Delaware"),
                   ("Florida","Florida"),
                   ("Georgia","Georgia"),
                   ("Hawaii","Hawaii"),
-                  ("Guam","Guam"),
                   ("Iowa","Iowa"),
                   ("Idaho","Idaho"),
                   ("Illinois","Illinois"),
@@ -44,15 +43,12 @@ class CarForm(forms.ModelForm):
                   ("Oklahoma","Oklahoma"),
                   ("Oregon","Oregon"),
                   ("Pennsylvania","Pennsylvania"),
-                  ("Puerto Rico","Puerto Rico"),
-                  ("Rhode Island","Rhode Island"),
                   ("South Carolina","South Carolina"),
                   ("South Dakota","South Dakota"),
                   ("Tennessee","Tennessee"),
                   ("Texas","Texas"),
                   ("Utah","Utah"),
                   ("Virginia","Virginia"),
-                  ("Virgin Islands","Virgin Islands"),
                   ("Vermont","Vermont"),
                   ("Washington","Washington"),
                   ("Wisconsin","Wisconsin"),
@@ -62,4 +58,17 @@ class CarForm(forms.ModelForm):
                                              choices=OPTIONS)
     class Meta:
         model = CarModel
-        fields = ("link","states")
+        fields = ("name","link","states")
+
+class SettingsForm(forms.ModelForm):
+    STATUS_CHOICES = (('Start','Start'),
+                    ('Stop','Stop'),)
+    o = Podesavanja.objects.get(id=1)
+
+    proxylist = forms.CharField(required=False, widget=forms.TextInput(attrs={'placeholder' : "0.00.0:8000','123.45.67.8910'",'class' : 'uk-input uk-width-1-2', 'style': 'width: 100%; margin: 20px 0px; border-radius: 10px;', 'value' : o.proxylist}))
+    status = forms.ChoiceField(required=False, choices=STATUS_CHOICES, initial=o.status)
+    #description = forms.CharField(required=True, widget=forms.Textarea(attrs={'placeholder' : 'Please enter the  description', 'size' : 300, 'class' : 'uk-input uk-width-1-2', 'style': 'width: 100%; margin: 20px 0px; border-radius: 10px;','cols': 120, 'rows': 50}))
+    class Meta:
+        model = Podesavanja
+        fields = ("proxylist", "status")
+    

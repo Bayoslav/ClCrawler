@@ -19,7 +19,10 @@
     list-style-type: none;
   }
 </style>
-  <h1> INDEX </h1>
+  <h1> INDEX <a href='/settings'><button type="button" class="btn btn-default" aria-label="glyphicon-cog">
+        <span class="glyphicon glyphicon-cog" aria-hidden="true" ></span>
+    </button></a></h1>
+
   <form method="POST">
     {% csrf_token %}
           <p>
@@ -33,24 +36,27 @@
 
         <table class="pure-table">
 
-        <th>Car link</th>
+        <th>Name</th>
+            <th> Car link </th>
             <th> States </th>
-            <th> Date added </th>
+            
             <th> Options </th>
         </tr>
             {% for car in list %}
                 <tr>
-                    <td> {{ car.link }}</td>
-                    <td>{{ car.states }}</td>
-                    <td> {{  car.date_created }}</td>
+                    <td> {{ car.name }}</td>
+                    <td>{{ car.link|cut:".craigslist.org/search/cto?query" }}</td>
+                    <td> {{  car.states }}</td>
                     <td> <a href='edit/?carid={{ car.id }}'>
                         <button type="button" class="btn btn-default" aria-label="glyphicon-edit">
                             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                         </button> </a> </td>
+                        
                     <td>  <a href="remove/?carid={{  car.id }}">
                         <button type="button" class="btn btn-default" aria-label="glyphicon-remove" href='remove/?carid={{ car.id }}'>
                             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                         </button></a></td>
+                    
 
                 </tr>
 
