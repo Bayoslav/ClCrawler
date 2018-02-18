@@ -86,10 +86,10 @@ def carscrap(link):
                     print("\n\nstates left to scrap:" + str(nisam) + "kek")
                     
                     if(nisam!=[] and threads==[]):
-                        lenig = length(nisam)
+                        lenig = len(nisam)
                         check(lenig)
                         break
-                    if(nisam==[]):
+                    if(nisam==[] and len(threads)<=1):
                         abk = dicti
                         print("ABK:      ", str(abk))
                         print("NISAM : ", str(nisam))
