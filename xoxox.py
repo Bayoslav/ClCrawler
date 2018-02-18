@@ -14,9 +14,10 @@ import time
 ipic = '344444:8888'
 ipic = ipic[0:-1] + '9'
 print(ipic)
-pd = Podesavanja.objects.get(id=1)
-prox = pd.proxylist
-proxylist = '[' + prox + ']'
-proxylist = ast.literal_eval(proxylist)
-print(proxylist)
-print(type(proxylist))
+try:
+    pd = Podesavanja.objects.get(id=1)
+except:
+    lst = ['35.184']
+    pd = Podesavanja.objects.create(proxylist='104.199.117.46',status='Start',id=1)
+    pd.save()
+

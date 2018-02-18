@@ -76,9 +76,12 @@ def getproxy():
         #23.254.75.31:21262,45.57.177.74:21318,45.57.181.244:21302,69.58.15.89:21240,23.254.75.203:21318
         #proxylist = ['23.254.75.31:21262','45.57.177.74:21318','45.57.181.244:21302','69.58.15.89:21240','23.254.75.203:21318']
         #proxy = random.choice(proxylist)
-        
-        proxylist = '[' + prox + ']'
-        
+        if(prox[0]!="'"):
+            poxy = "'" + prox + "'"
+            proxylist = '[' + poxy + ']' 
+        else:
+            proxylist = '[' + prox + ']'
+        #print(proxylist)
         proxylist = ast.literal_eval(proxylist)
         #print(proxylist)
         proxy = random.choice(proxylist)
