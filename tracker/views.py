@@ -17,10 +17,10 @@ class PodesavanjaVju(View):
             print(proxylist)
             status = request.POST.get('status')
             #proxylist = 
-            #o = Podesavanja.objects.get(id=1)
-            #o.status = status 
-            #o.proxylist = proxylist
-            #o.save()
+            o = Podesavanja.objects.get(id=1)
+            o.status = status 
+            o.proxylist = proxylist
+            o.save()
             return redirect('/settings/')
 
 class IndexView(View):

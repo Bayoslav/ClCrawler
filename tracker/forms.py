@@ -63,10 +63,14 @@ class CarForm(forms.ModelForm):
 class SettingsForm(forms.ModelForm):
     STATUS_CHOICES = (('Start','Start'),
                     ('Stop','Stop'),)
-    #o = Podesavanja.objects.get(id=1)
-
-    proxylist = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control','placeholder': "'proxy','proxy2'",'aria-describedby': 'sizing-addon3'}))
-    status = forms.ChoiceField(required=False, choices=STATUS_CHOICES)
+    try:
+        o = Podesavanja.objects.get(id=1)
+        proxylist = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control','placeholder': "'proxy','proxy2'",'aria-describedby': 'sizing-addon3', 'value' : o.proxylist}))
+        status = forms.ChoiceField(required=False, choices=STATUS_CHOICES, initial = o.status)
+    except:
+        proxylist = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control','placeholder': "'proxy','proxy2'",'aria-describedby': 'sizing-addon3'}))
+        status = forms.ChoiceField(required=False, choices=STATUS_CHOICES)
+    
     #description = forms.CharField(required=True, widget=forms.Textarea(attrs={'placeholder' : 'Please enter the  description', 'size' : 300, 'class' : 'uk-input uk-width-1-2', 'style': 'width: 100%; margin: 20px 0px; border-radius: 10px;','cols': 120, 'rows': 50}))
     class Meta:
         model = Podesavanja
