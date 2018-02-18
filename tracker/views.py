@@ -23,10 +23,19 @@ class PodesavanjaVju(View):
             return redirect('/settings/')
 
 class IndexView(View):
+    global cars
+    global status
+    o = Podesavanja.objects.get(id=1)
+    if(o.status=='Stop'):
+        status = 'Stopped'
+    else:
+        status = 'Operational'
+    cars = CarModel.objects.all()
     def get(self, request):
         form = CarForm()
-        cars = CarModel.objects.all()
-        return render(request, 'index.html', {'form': form, 'list' : cars})
+        
+        
+        return render(request, 'index.html', {'form': form, 'list' : cars, 'status' : status})
 
     def post(self, request):
         form = CarForm(request.POST)
@@ -43,7 +52,7 @@ class IndexView(View):
             return redirect('/')
         else:
             form = CarForm()
-        return render(request, 'index.html', {'form': form})
+        return render(request, 'index.html', {'form': form, 'list' : cars, 'status' : status })
 
 class Remove(View):
     #Post = Post.objects.all()
