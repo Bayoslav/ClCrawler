@@ -104,7 +104,7 @@ def carscrap(link):
             #print(kekec)
             #threadLock.acquire()
             #threadLock.acquire()
-                the_link = 'https://' + link + serchurl
+                the_link = 'http://' + link + serchurl
                 print(the_link)
             #href = link.get('href') #state searcher
             #mehurl = href + serchurl
@@ -122,6 +122,7 @@ def carscrap(link):
                          print ("BLOCKED")
                          logging.warning("IP Blocked")
                     #print(content)
+                         print(source.history)
                          ime = source.history[0].headers['x-cache-proxyname']
                          payld = {
                             'name' : ime,
@@ -129,6 +130,7 @@ def carscrap(link):
                          headers={'Authorization' : 'c2FtZXJ6'}
                          ipic = proxies.get('http')
                          ipic = ipic[0:-1] + '9'
+                         print(ipic)
                          stop = requests.post(ipic + '/instances/stop', json=payld,headers=headers)
                          raise EnvironmentError
                 except EnvironmentError:
@@ -177,7 +179,7 @@ def carscrap(link):
                                 carinf = title + " - " + price
                                 #carsinfo = carsinfo + "Price: " + price + "\nTitle: " + title + "\nCity: " + link + "\nLink: " + carurl + "\n"
                                 message = "Price: " + price + "\nTitle: " + title + "\nCity: " + link + "\nLink: " + carurl
-                                send_email('zeaitirsamer5@gmail.com','Samerz2010','gaming4ever93@gmail.com',carinf,message)
+                                send_email('zeaitirsamer5@gmail.com','Samerz2010','Bzeaiter@gmail.com',carinf,message)
                                 print("\n\nEmail SENT\n\n", carurl)
                                 cities[link].append(ded)
                                 
