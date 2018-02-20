@@ -136,6 +136,7 @@ def carscrap(link):
                 except EnvironmentError:
                     print("PROXY ERROR AT:" + link)
                     nisam.remove(link)
+                    sys.exit()
                     logging.warning("PROXY ERROR")
                     
                 else:
@@ -231,8 +232,8 @@ threadLock = threading.Lock()
 #nisam = get_state(states)
 #lengthd = len(nisam)
 def check(length):
-    for i in range(0,length,1):
-        thread1=MyThread(nisam[i])
+    for i in nisam:
+        thread1=MyThread(i)
         thread1.start()
         threads.append(thread1)
 
@@ -269,6 +270,7 @@ def main(states,url):
     #print(states)
     states = states.split(',')
     #print(states)
+    print("main")
     for state in states:
         nisam = nisam + (get_state(state))
     length = len(nisam)
@@ -326,6 +328,7 @@ while(1):
             else:
                 #a = a+1
                 #print("Continuing", a)
+                logging.info("Else, 330")
                 continue
           except:
               print("Module error [0]")
